@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style type="text/css">
+        .b1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+        .b2 {
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+        }
+    </style>
+    <title>Website</title>
+</head>
+
+<body>
+
+    <p>hello world</p>
+    <p id="demo">此处显示结果</p>
+    <h1>我的第一个标题</h1>
+    <h2>我的第二个标题</h2>
+    <p>我的第一个段落。</p>
+    <button id="btn">开始</button>
+    <div id="box" class="b1"></div>
+    <form action="plugin.php?id=ahome_dayquestion:pop" method="post" id="myform" name="myform"
+        enctype="multipart/form-data" onsubmit="return CheckPost();">
+        <input type="hidden" name="formhash" value="c7fcb29f">
+        <div style="padding-bottom:10px;"><span style="font-size:16px;">
+                <font color=#FF0000><b>【机会】</b> 1 / 3</font>
+            </span><br><span style="font-size:16px;">
+                <font color=#FF6600><b>【题目】</b>&nbsp;柴刀女的出处？</font>
+            </span></div>
+        <div class='qs_option' style='cursor:pointer;' onclick="document.getElementById('a2').checked='checked';"><input
+                type="radio" id="a2" name="answer" value="2">&nbsp;&nbsp;命运石之门</div>
+        <div class='qs_option' style='cursor:pointer;' onclick="document.getElementById('a1').checked='checked';"><input
+                type="radio" id="a1" name="answer" value="1">&nbsp;&nbsp;寒蝉鸣泣之时</div>
+        <div class='qs_option' style='cursor:pointer;' onclick="document.getElementById('a3').checked='checked';"><input
+                type="radio" id="a3" name="answer" value="3">&nbsp;&nbsp;未来日记</div>
+        <div class='qs_option' style='cursor:pointer;' onclick="document.getElementById('a4').checked='checked';"><input
+                type="radio" id="a4" name="answer" value="4">&nbsp;&nbsp;空之境界</div>
+        <div style="padding:15px;">
+            <center><button type="submit" style="padding-left:10px;padding-right:10px;" onclick="validate(this);"
+                    name="submit" value="true" class="pn pnc"><strong>提交答案</strong></button></center>
+        </div>
+    </form>
+    <script>
+        var a = "ddwed;dwefwe"
+        var b = a.split(";")
+        console.log(b.length)
+    </script>
+</body>

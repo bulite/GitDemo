@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="img/favicon.ico" />
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #outer {
+            width: 520px;
+            height: 400px;
+            margin: 100px auto;
+            background-color: yellowgreen;
+            padding: 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #imgList {
+            list-style: none;
+            position: absolute;
+            left: 0px;
+        }
+
+        #imgList li {
+            float: left;
+            margin: 0 10px;
+        }
+
+        #imgList li img {
+            width: 500px;
+            height: 400px;
+        }
+
+        #navDiv {
+            position: absolute;
+            bottom: 15px;
+            left: 185px;
+        }
+
+        #navDiv a {
+            float: left;
+            width: 15px;
+            height: 15px;
+            background-color: red;
+            margin: 0 5px;
+            opacity: 0.5;
+        }
+
+        #navDiv a:hover {
+            background-color: black;
+        }
+    </style>
+    <title>Website</title>
+</head>
+
+<body>
+    <p>hello world</p>
+    <p id="demo">此处显示结果</p>
+    <h1>我的第一个标题</h1>
+    <h2>我的第二个标题</h2>
+    <p>我的第一个段落。</p>
+    <button id="btn">开始</button>
+    <br />
+    <br />
+    <br />
+    <div id="outer">
+        <ul id="imgList">
+            <li><img src="img/1.jpg" /></li>
+            <li><img src="img/2.jpg" /></li>
+            <li><img src="img/3.jpg" /></li>
+            <li><img src="img/4.jpg" /></li>
+            <li><img src="img/5.jpg" /></li>
+            <li><img src="img/6.jpg" /></li>
+            <li><img src="img/1.jpg" /></li>
+        </ul>
+        <div id="navDiv">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+        <div style="width:500px;height:400px"></div>
+    </div>
+    <script>
+        var imglist = document.getElementById("imgList");
+        var length = imglist.children.length
+        imglist.style.width = 520 * length + "px";
+        var navDiv = document.getElementById("navDiv");
+        var outer = document.getElementById("outer");
+        navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth) / 2 + "px";
+        var index = 0;
+        var allA = document.getElementsByTagName("a");
+        allA[index].style.backgroundColor = "black";
+        for (var i = 0; i < allA.length; i++) {
+            allA[i].index = i
+            allA[i].onclick = function () {
+                clearInterval(timer);
+                move(imglist, -520 * this.index, 20, autoChange);
+                // imgList.style.left = -520 * this.index + "px";
+                for (var j = 0; j < allA.length; j++) {
+                    allA[j].style.backgroundColor = "";
+                }
+                this.style.backgroundColor = "black";
+            }
+        }
+        function move(element, target, speed, fun) {
+            clearInterval(element.timer);
+            var oldValue = parseInt(getComputedStyle(element, null)["left"])
+            var distance = Math.abs(parseInt((target - oldValue) / 520))
+            if (target == 0) {
+                distance = 1;
+                target = -520 * 6;
+            }
+            speed = speed * distance
+            element.timer = setInterval(() => {
+                var oldValue = parseInt(getComputedStyle(element, null)["left"])
+                if (speed * (oldValue - target) > 0) {
+                    speed = -speed
+                }
+                var newValue = oldValue + speed;
+                if (speed * (newValue - target) > 0) {
+                    newValue = target
+                }
+                element.style.left = newValue + "px"
+                if (newValue == target) {
+                    if (target == -520 * 6) {
+                        element.style.left = "0px";
+                    }
+                    clearInterval(element.timer)
+                    fun && fun();
+                }
+            }, 30);
+        }
+
+        var timer;
+        function autoChange() {
+            clearInterval(timer);
+            timer = setInterval(() => {
+                var oldindex = parseInt(parseInt(getComputedStyle(imglist, null)["left"]) / -520);
+                var newindex = oldindex + 1 > 5 ? 0 : oldindex + 1
+                move(imglist, -520 * newindex, 20)
+                for (var j = 0; j < allA.length; j++) {
+                    allA[j].style.backgroundColor = "";
+                }
+                allA[newindex].style.backgroundColor = "black";
+            }, 3000);
+        }
+        btn = document.getElementById("btn");
+        btn.onclick = autoChange;
+    </script>
+</body>
